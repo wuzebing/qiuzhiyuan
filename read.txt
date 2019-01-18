@@ -1,0 +1,24 @@
+1、启动ngix
+C:\Users\Administrator\Downloads\nginx-1.12.2>
+start nginx
+taskkill /im nginx.exe /f
+2、nginx 配置
+server {
+        listen       8081;
+        server_name  localhost;
+        root E:\code2019\qiuzhiyuan;
+        index index.html;
+        add_header Cache-Control no-cache;
+        add_header Cache-Control private;
+        add_header Access-Control-Allow-Origin *;
+        add_header Access-Control-Allow-Headers Origin,X-Requested-Width,Content-Type,Accept;
+        #charset koi8-r;
+        #access_log  logs/host.access.log  main;
+
+	    location /api/ {
+            proxy_pass http://39.105.232.231;
+        }
+
+        location /upload/ {
+            proxy_pass http://39.105.232.231;
+        }
