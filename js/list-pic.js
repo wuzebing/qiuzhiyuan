@@ -8,6 +8,8 @@ var listPicManager = {
 
     id: null,
 
+    articleId:null,
+
     pageNum:1,
 
     pageSize:12,
@@ -15,13 +17,47 @@ var listPicManager = {
     total:0,
 
     init:function(){
-        this.getDeviceList();
         this.id = getQueryString('id');
+        this.articleId = getQueryString('articleId');
+        this.getDeviceList();
         if(this.id != null){
-            this.getArticleByMenuId(this.id);
+            if(this.articleId != null){
+                this.getArticleById();
+            }else{
+                this.getArticleByMenuId(this.id);
+            }
         }else{
             this.getAllArticleInDevice();
         }
+    },
+    formatArticleInfo:function(){
+        $("#title-pic").html("设备详情");
+    },
+
+    formatListInfo:function(){
+        $("#title-pic").html("设备列表");
+    },
+    getArticleById:function(){
+        var _this = this;
+        $.ajax({
+            url: 'http://' + location.host + '/api/menu/getArticleById?id='+this.articleId,
+            method:'get',
+            success:function(res){
+                if(res.success){
+                    var data = res.data;
+                    $("#pic-list").html('<li><div class="pic-title-content">'
+                           +'<div class="pic-title-img"><img src="http://'+location.host+'/'+data.pictureUrl+'"/></div>'
+                            +'<div class="pic-title-title"><span>'+data.title+'</span><p>'+data.summary+'</p></div>'
+                        +'</div><div class="pic-content">'+(data.content.replace(/src=\"/g,'src="http://'+location.host))+'</div></li>');
+                    _this.formatArticleInfo();
+                }else{
+                    alert("请求失败，请刷新重试")
+                }
+            },
+            error:function(err){
+                alert("请求失败，请刷新重试")
+            }
+        });
     },
 
     getAllArticleInDevice:function(){
@@ -37,15 +73,16 @@ var listPicManager = {
                         var obj = data[i];
                         str = str + '<li class="pic">'
                             +'<div class="img-box">'
-                            +'<a href="detail-pic.html?id='+obj.articleId+'">'
+                            +'<a href="list-pic.html?id='+obj.folderId+'&articleId='+obj.articleId+'">'
                             +'<img src="http://'+location.host+'/'+obj.pictureUrl+'">'
                             +'</a>'
                             +'</div>'
-                            +'<h3><a href="detail-pic.html?id='+obj.articleId+'">'+obj.title+'</a></h3>'
+                            +'<h3><a href="list-pic.html?id='+obj.folderId+'&articleId='+obj.articleId+'">'+obj.title+'</a></h3>'
                             +'</li>';
                     }
                     $("#pic-list").html(str);
                     _this.total = data.count;
+                    _this.formatListInfo();
                     _this.createPage();
                 }else{
                     alert("请求失败，请刷新重试")
@@ -70,15 +107,16 @@ var listPicManager = {
                         var obj = data.list[i];
                         str = str + '<li class="pic">'
                            +'<div class="img-box">'
-                            +'<a href="detail-pic.html?id='+obj.articleId+'">'
+                            +'<a href="list-pic.html?id='+obj.folderId+'&articleId='+obj.articleId+'">'
                             +'<img src="http://'+location.host+'/'+obj.pictureUrl+'">'
                             +'</a>'
                             +'</div>'
-                            +'<h3><a href="detail-pic.html?id='+obj.articleId+'">'+obj.title+'</a></h3>'
+                            +'<h3><a href="list-pic.html?id='+obj.folderId+'&articleId='+obj.articleId+'">'+obj.title+'</a></h3>'
                             +'</li>';
                     }
                     $("#pic-list").append(str);
                     _this.total = data.count;
+                    _this.formatListInfo();
                     _this.createPage();
                 }else{
                     alert("请求失败，请刷新重试")

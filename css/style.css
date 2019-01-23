@@ -817,3 +817,33 @@ a:hover {
     color: #bbb;
     font-size: 12px;
 }
+.pic-title-content{
+    height: 180px;
+    overflow: hidden;
+    width: 100%;
+}
+.pic-title-img{
+    height: 200px;
+    width: 200px;
+    float:left;
+}
+.pic-title-img img{
+    height: 200px;
+    width: 200px;
+}
+.pic-title-title{
+    padding-left:220px;
+}
+.pic-title-title span{
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 20px;
+    color:#0f62c5;
+    display: inline-block;
+}
+.pic-title-title p{
+    margin-top:20px;
+}
+.pic-content{
+    margin-top:20px;
+}
