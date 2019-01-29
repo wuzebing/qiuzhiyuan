@@ -10,7 +10,11 @@ var menuManager = {
         if(ename == 'gonggao'){//公司公告
             return 'detail.html';
         }
-        return 'javasrcipt:void(0)';
+        if(ename == 'rysl'){
+            return 'people.html';
+        }
+
+        return 'other.html?key='+ename;
     },
 
     getMenuLis:function(){

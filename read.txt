@@ -22,3 +22,27 @@ server {
         location /upload/ {
             proxy_pass http://39.105.232.231;
         }
+
+
+sudo vim /usr/local/etc/nginx/nginx.conf
+nginx 
+nginx -s reload
+nginx -s stop
+
+        server_name  localhost;
+        root /Users/wuzebing/Documents/zebing/qiuzhiyuan;
+        index index.html;
+        add_header Cache-Control no-cache;
+        add_header Cache-Control private;
+        add_header Access-Control-Allow-Origin *;
+        add_header Access-Control-Allow-Headers Origin,X-Requested-Width,Content-Type,Accept;
+        #charset koi8-r;
+        #access_log  logs/host.access.log  main;
+
+        location /api/ {
+            proxy_pass http://39.105.232.231;
+        }
+
+        location /upload/ {
+            proxy_pass http://39.105.232.231;
+        }

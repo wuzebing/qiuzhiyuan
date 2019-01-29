@@ -17,7 +17,7 @@ var indexManager = {
                         var obj = data[i];
 
                         str = str + '<li>'
-                            +'<a href="list-pic.html?id='+obj.articleId+'"><img alt="'+obj.title+'" src="http://'+location.host+'/'+obj.pictureUrl+'"/></a>'
+                            +'<a href="list-pic.html?id='+obj.folderId+'&articleId='+obj.articleId+'"><img alt="'+obj.title+'" src="http://'+location.host+'/'+obj.pictureUrl+'"/></a>'
                         +'<span>'+obj.title+'</span>'
                         +'</li>'
                         +' <li>';
