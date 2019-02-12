@@ -57,14 +57,15 @@ a:hover {
 }
 
 #hearder2 .logo {
-    width: 180px;
+    width: 84px;
     height: 90px;
     float: left;
 }
 
 #hearder2 .logo img {
-    width: 260px;
-    height: 90px;
+    width: 81px;
+    height: 69px;
+    margin-top: 10px;
 }
 
 #hearder2 .logo-name {
